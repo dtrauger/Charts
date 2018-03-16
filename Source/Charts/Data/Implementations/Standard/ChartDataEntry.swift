@@ -66,7 +66,7 @@ open class ChartDataEntry: ChartDataEntryBase
     
     open override var description: String
     {
-        return "ChartDataEntry, x: \(x), y \(y)"
+        return "ChartDataEntry, x: \(x), y \(y) data \(data)"
     }
     
     // MARK: NSCopying
