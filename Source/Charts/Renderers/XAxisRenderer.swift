@@ -387,7 +387,12 @@ open class XAxisRenderer: AxisRendererBase
         
         context.beginPath()
         context.move(to: CGPoint(x: position.x, y: viewPortHandler.contentTop))
-        context.addLine(to: CGPoint(x: position.x, y: viewPortHandler.contentBottom))
+        
+        if limitLine.labelPosition == .centerBottom {
+            context.addLine(to: CGPoint(x: position.x, y: viewPortHandler.contentBottom-limitLine.valueFont.lineHeight))
+        } else {
+            context.addLine(to: CGPoint(x: position.x, y: viewPortHandler.contentBottom))
+        }
         
         context.setStrokeColor(limitLine.lineColor.cgColor)
         context.setLineWidth(limitLine.lineWidth)
@@ -444,6 +449,16 @@ open class XAxisRenderer: AxisRendererBase
                         y: viewPortHandler.contentTop + yOffset),
                     align: .right,
                     attributes: [NSAttributedStringKey.font: limitLine.valueFont, NSAttributedStringKey.foregroundColor: limitLine.valueTextColor])
+            }
+            else if limitLine.labelPosition == .centerBottom
+            {
+                    ChartUtils.drawText(context: context,
+                        text: label,
+                        point: CGPoint(
+                        x: position.x,
+                        y: viewPortHandler.contentBottom - labelLineHeight),
+                        align: .center,
+                        attributes: [NSAttributedStringKey.font: limitLine.valueFont, NSAttributedStringKey.foregroundColor: limitLine.valueTextColor])
             }
             else
             {
