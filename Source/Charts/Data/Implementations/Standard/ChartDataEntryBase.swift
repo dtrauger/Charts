@@ -14,10 +14,10 @@ import Foundation
 open class ChartDataEntryBase: NSObject
 {
     /// the y value
-    open var y = Double(0.0)
+    @objc open var y = Double(0.0)
     
     /// optional spot for additional data this Entry represents
-    open var data: AnyObject?
+    @objc open var data: AnyObject?
     
     public override required init()
     {
@@ -63,7 +63,7 @@ open class ChartDataEntryBase: NSObject
             return false
         }
         
-        if fabs((object! as AnyObject).y - y) > DBL_EPSILON
+        if fabs((object! as AnyObject).y - y) > Double.ulpOfOne
         {
             return false
         }
@@ -96,7 +96,7 @@ public func ==(lhs: ChartDataEntryBase, rhs: ChartDataEntryBase) -> Bool
         return false
     }
     
-    if fabs(lhs.y - rhs.y) > DBL_EPSILON
+    if fabs(lhs.y - rhs.y) > Double.ulpOfOne
     {
         return false
     }

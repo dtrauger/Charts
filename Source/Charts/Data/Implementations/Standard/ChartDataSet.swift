@@ -38,7 +38,7 @@ open class ChartDataSet: ChartBaseDataSet
         _values = [ChartDataEntry]()
     }
     
-    public init(values: [ChartDataEntry]?, label: String?)
+   @objc public init(values: [ChartDataEntry]?, label: String?)
     {
         super.init(label: label)
         
@@ -47,7 +47,7 @@ open class ChartDataSet: ChartBaseDataSet
         self.calcMinMax()
     }
     
-    public convenience init(values: [ChartDataEntry]?)
+    @objc public convenience init(values: [ChartDataEntry]?)
     {
         self.init(values: values, label: "DataSet")
     }
@@ -58,21 +58,21 @@ open class ChartDataSet: ChartBaseDataSet
     internal var _values: [ChartDataEntry]!
     
     /// maximum y-value in the value array
-    internal var _yMax: Double = -DBL_MAX
+    internal var _yMax: Double = -Double.greatestFiniteMagnitude
     
     /// minimum y-value in the value array
-    internal var _yMin: Double = DBL_MAX
+    internal var _yMin: Double = Double.greatestFiniteMagnitude
     
     /// maximum x-value in the value array
-    internal var _xMax: Double = -DBL_MAX
+    internal var _xMax: Double = -Double.greatestFiniteMagnitude
     
     /// minimum x-value in the value array
-    internal var _xMin: Double = DBL_MAX
+    internal var _xMin: Double = Double.greatestFiniteMagnitude
     
     /// *
     /// - note: Calls `notifyDataSetChanged()` after setting a new value.
     /// - returns: The array of y-values that this DataSet represents.
-    open var values: [ChartDataEntry]
+    @objc open var values: [ChartDataEntry]
     {
         get
         {
@@ -86,22 +86,22 @@ open class ChartDataSet: ChartBaseDataSet
     }
     
     /// Use this method to tell the data set that the underlying data has changed
-    open override func notifyDataSetChanged()
+    @objc open override func notifyDataSetChanged()
     {
         calcMinMax()
     }
     
-    open override func calcMinMax()
+    @objc open override func calcMinMax()
     {
         if _values.count == 0
         {
             return
         }
         
-        _yMax = -DBL_MAX
-        _yMin = DBL_MAX
-        _xMax = -DBL_MAX
-        _xMin = DBL_MAX
+        _yMax = -Double.greatestFiniteMagnitude
+        _yMin = Double.greatestFiniteMagnitude
+        _xMax = -Double.greatestFiniteMagnitude
+        _xMin = Double.greatestFiniteMagnitude
         
         for e in _values
         {
@@ -109,15 +109,15 @@ open class ChartDataSet: ChartBaseDataSet
         }
     }
     
-    open override func calcMinMaxY(fromX: Double, toX: Double)
+    @objc open override func calcMinMaxY(fromX: Double, toX: Double)
     {
         if _values.count == 0
         {
             return
         }
         
-        _yMax = -DBL_MAX
-        _yMin = DBL_MAX
+        _yMax = -Double.greatestFiniteMagnitude
+        _yMin = Double.greatestFiniteMagnitude
         
         let indexFrom = entryIndex(x: fromX, closestToY: Double.nan, rounding: .down)
         let indexTo = entryIndex(x: toX, closestToY: Double.nan, rounding: .up)
@@ -131,7 +131,7 @@ open class ChartDataSet: ChartBaseDataSet
         }
     }
     
-    open func calcMinMaxX(entry e: ChartDataEntry)
+    @objc open func calcMinMaxX(entry e: ChartDataEntry)
     {
         if e.x < _xMin
         {
@@ -143,7 +143,7 @@ open class ChartDataSet: ChartBaseDataSet
         }
     }
     
-    open func calcMinMaxY(entry e: ChartDataEntry)
+    @objc open func calcMinMaxY(entry e: ChartDataEntry)
     {
         if e.y < _yMin
         {
@@ -165,24 +165,24 @@ open class ChartDataSet: ChartBaseDataSet
     }
     
     /// - returns: The minimum y-value this DataSet holds
-    open override var yMin: Double { return _yMin }
+    @objc open override var yMin: Double { return _yMin }
     
     /// - returns: The maximum y-value this DataSet holds
-    open override var yMax: Double { return _yMax }
+    @objc open override var yMax: Double { return _yMax }
     
     /// - returns: The minimum x-value this DataSet holds
-    open override var xMin: Double { return _xMin }
+    @objc open override var xMin: Double { return _xMin }
     
     /// - returns: The maximum x-value this DataSet holds
-    open override var xMax: Double { return _xMax }
+    @objc open override var xMax: Double { return _xMax }
     
     /// - returns: The number of y-values this DataSet represents
-    open override var entryCount: Int { return _values?.count ?? 0 }
+    @objc open override var entryCount: Int { return _values?.count ?? 0 }
     
     /// - returns: The entry object found at the given index (not x-value!)
     /// - throws: out of bounds
     /// if `i` is out of bounds, it may throw an out-of-bounds exception
-    open override func entryForIndex(_ i: Int) -> ChartDataEntry?
+    @objc open override func entryForIndex(_ i: Int) -> ChartDataEntry?
     {
         return _values[i]
     }
@@ -193,7 +193,7 @@ open class ChartDataSet: ChartBaseDataSet
     /// - parameter xValue: the x-value
     /// - parameter closestToY: If there are multiple y-values for the specified x-value,
     /// - parameter rounding: determine whether to round up/down/closest if there is no Entry matching the provided x-value
-    open override func entryForXValue(
+    @objc open override func entryForXValue(
         _ xValue: Double,
         closestToY yValue: Double,
         rounding: ChartDataSetRounding) -> ChartDataEntry?

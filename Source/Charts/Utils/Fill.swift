@@ -180,14 +180,14 @@ open class Fill: NSObject
         return Fill(color: color)
     }
     
-    open class func fillWithLinearGradient(
+    @objc open class func fillWithLinearGradient(
         _ linearGradient: CGGradient,
         angle: CGFloat) -> Fill
     {
         return Fill(linearGradient: linearGradient, angle: angle)
     }
     
-    open class func fillWithRadialGradient(
+    @objc open class func fillWithRadialGradient(
         _ radialGradient: CGGradient,
         startOffsetPercent: CGPoint,
         startRadiusPercent: CGFloat,
@@ -204,7 +204,7 @@ open class Fill: NSObject
         )
     }
     
-    open class func fillWithRadialGradient(_ radialGradient: CGGradient) -> Fill
+    @objc open class func fillWithRadialGradient(_ radialGradient: CGGradient) -> Fill
     {
         return Fill(radialGradient: radialGradient)
     }

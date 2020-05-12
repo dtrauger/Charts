@@ -72,13 +72,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     {
         var width = CGFloat(60.0)
         if (span < 240) { //z0
-            width = 60;
+            width = 48;//60;
         } else if (span < 1200) { //z1
             width = 240;
         } else if (span < 10000) { //z2
-            width = 960;
+            width = 1440//960;
         } else if (span < 80000) { //z3
-            width = 4800*3;
+            width = 8640;//4800*3;
         } else { //z4
             width = 15360*2;
         }
@@ -578,7 +578,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     /// Draws a value at the specified x and y position.
     open func drawValue(context: CGContext, value: String, xPos: CGFloat, yPos: CGFloat, font: NSUIFont, align: NSTextAlignment, color: NSUIColor)
     {
-        ChartUtils.drawText(context: context, text: value, point: CGPoint(x: xPos, y: yPos), align: align, attributes: [NSFontAttributeName: font, NSForegroundColorAttributeName: color])
+        ChartUtils.drawText(context: context, text: value, point: CGPoint(x: xPos, y: yPos), align: align, attributes: [convertFromNSAttributedStringKey(NSAttributedString.Key.font): font, convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor): color])
     }
     
     open override func drawExtras(context: CGContext)
@@ -658,4 +658,9 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     {
         high.setDraw(x: barRect.midX, y: barRect.origin.y)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }

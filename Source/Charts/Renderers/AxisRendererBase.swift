@@ -97,8 +97,16 @@ open class AxisRendererBase: Renderer
     {
         guard let axis = self.axis else { return }
         
-        let yMin = min
-        let yMax = max
+        var yMin = min
+        var yMax = max
+        
+        if yMin.isNaN {
+            yMin = 0
+        }
+        
+        if yMax.isNaN {
+            yMax = 1
+        }
         
         let labelCount = axis.labelCount
         let range = abs(yMax - yMin)

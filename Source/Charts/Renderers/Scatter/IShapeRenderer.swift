@@ -26,5 +26,7 @@ public protocol IShapeRenderer : NSObjectProtocol
         dataSet: IScatterChartDataSet,
         viewPortHandler: ViewPortHandler,
         point: CGPoint,
-        color: NSUIColor)
+        color: NSUIColor,
+        angle: Double)
+    
 }

@@ -17,7 +17,8 @@ open class ChevronDownShapeRenderer : NSObject, IShapeRenderer
                 dataSet: IScatterChartDataSet,
                 viewPortHandler: ViewPortHandler,
                 point: CGPoint,
-                color: NSUIColor)
+                color: NSUIColor,
+                angle: Double)
     {
         let shapeSize = dataSet.scatterShapeSize
         let shapeHalf = shapeSize / 2.0

@@ -23,13 +23,13 @@ open class BarChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBarChartDat
         self.calcEntryCountIncludingStacks(entries: values as! [BarChartDataEntry])
     }
     
-    public required init()
+    @objc public required init()
     {
         super.init()
         initialize()
     }
     
-    public override init(values: [ChartDataEntry]?, label: String?)
+    @objc public override init(values: [ChartDataEntry]?, label: String?)
     {
         super.init(values: values, label: label)
         initialize()
@@ -78,7 +78,7 @@ open class BarChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBarChartDat
         }
     }
     
-    open override func calcMinMax(entry e: ChartDataEntry)
+    @objc open override func calcMinMax(entry e: ChartDataEntry)
     {
         guard let e = e as? BarChartDataEntry
             else { return }
@@ -115,39 +115,39 @@ open class BarChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBarChartDat
     }
     
     /// - returns: The maximum number of bars that can be stacked upon another in this DataSet.
-    open var stackSize: Int
+    @objc open var stackSize: Int
     {
         return _stackSize
     }
     
     /// - returns: `true` if this DataSet is stacked (stacksize > 1) or not.
-    open var isStacked: Bool
+    @objc open var isStacked: Bool
     {
         return _stackSize > 1 ? true : false
     }
     
     /// - returns: The overall entry count, including counting each stack-value individually
-    open var entryCountStacks: Int
+    @objc open var entryCountStacks: Int
     {
         return _entryCountStacks
     }
     
     /// array of labels used to describe the different values of the stacked bars
-    open var stackLabels: [String] = ["Stack"]
+    @objc open var stackLabels: [String] = ["Stack"]
     
     // MARK: - Styling functions and accessors
     
     /// the color used for drawing the bar-shadows. The bar shadows is a surface behind the bar that indicates the maximum value
-    open var barShadowColor = NSUIColor(red: 215.0/255.0, green: 215.0/255.0, blue: 215.0/255.0, alpha: 1.0)
+    @objc open var barShadowColor = NSUIColor(red: 215.0/255.0, green: 215.0/255.0, blue: 215.0/255.0, alpha: 1.0)
 
     /// the width used for drawing borders around the bars. If borderWidth == 0, no border will be drawn.
-    open var barBorderWidth : CGFloat = 0.0
+    @objc open var barBorderWidth : CGFloat = 0.0
 
     /// the color drawing borders around the bars.
-    open var barBorderColor = NSUIColor.black
+    @objc open var barBorderColor = NSUIColor.black
 
     /// the alpha value (transparency) that is used for drawing the highlight indicator bar. min = 0.0 (fully transparent), max = 1.0 (fully opaque)
-    open var highlightAlpha = CGFloat(120.0 / 255.0)
+    @objc open var highlightAlpha = CGFloat(120.0 / 255.0)
     
     // MARK: - NSCopying
     

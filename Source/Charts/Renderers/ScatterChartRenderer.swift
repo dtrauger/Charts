@@ -90,8 +90,12 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
                 {
                     continue
                 }
-                
-                renderer.renderShape(context: context, dataSet: dataSet, viewPortHandler: viewPortHandler, point: point, color: dataSet.color(atIndex: j))
+                //NSLog("is wind arrow: %d",dataSet.shapeRenderer?.debugDescription?.contains("WindDirectionArrowRenderer") ?? 0);
+                if (dataSet.shapeRenderer?.debugDescription?.contains("WindDirectionArrowRenderer") ?? false) {
+                    renderer.renderShape(context: context, dataSet: dataSet, viewPortHandler: viewPortHandler, point: point, color: dataSet.color(atIndex: j), angle:Double(e.data as! NSNumber))
+                } else {
+                    renderer.renderShape(context: context, dataSet: dataSet, viewPortHandler: viewPortHandler, point: point, color: dataSet.color(atIndex: j), angle:0)
+                }
             }
             
             context.restoreGState()
@@ -174,7 +178,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
                             x: pt.x,
                             y: pt.y - shapeSize - lineHeight),
                         align: .center,
-                        attributes: [NSFontAttributeName: valueFont, NSForegroundColorAttributeName: dataSet.valueTextColorAt(j)]
+                        attributes: [convertFromNSAttributedStringKey(NSAttributedString.Key.font): valueFont, convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor): dataSet.valueTextColorAt(j)]
                     )
                 }
             }
@@ -233,4 +237,9 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
         
         context.restoreGState()
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }
